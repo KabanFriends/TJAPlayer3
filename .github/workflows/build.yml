@@ -8,15 +8,16 @@ jobs:
     runs-on: windows-2019
 
     steps:
-    - name: 依存関係のインストール
-      uses: |
-        actions/checkout@v1
-        warrenbuckley/Setup-Nuget@v1
-        warrenbuckley/Setup-MSBuild@v1
+    - name: チェックアウト
+      uses: actions/checkout@v1
+    - name: NuGetのセットアップ
+      uses: warrenbuckley/Setup-Nuget@v1
     - name: ソリューションのNuGetパッケージの復元
-      run: |
-        nuget restore $Env:GITHUB_WORKSPACE\TJAPlayer3.sln
-        MSBuild.exe $Env:GITHUB_WORKSPACE\TJAPlayer3.sln -p:Configuration=Release
+      run: nuget restore $Env:GITHUB_WORKSPACE\TJAPlayer3.sln
+    - name: MSBuildのセットアップ
+      uses: warrenbuckley/Setup-MSBuild@v1
+    - name: ソリューションのビルド
+      run: MSBuild.exe $Env:GITHUB_WORKSPACE\TJAPlayer3.sln -p:Configuration=Release
       timeout-minutes: 5
     - name: アーティファクトのアップロード
       uses: actions/upload-artifact@v1.0.0
