@@ -8,18 +8,18 @@ jobs:
     runs-on: windows-2019
 
     steps:
-    - name: チェックアウト
+    - name: Checkout repository
       uses: actions/checkout@v1
-    - name: NuGetのセットアップ
+    - name: Set up NuGet
       uses: warrenbuckley/Setup-Nuget@v1
-    - name: ソリューションのNuGetパッケージの復元
+    - name: Restore NuGet Packages
       run: nuget restore $Env:GITHUB_WORKSPACE\TJAPlayer3.sln
-    - name: MSBuildのセットアップ
+    - name: Set up MSBuild
       uses: warrenbuckley/Setup-MSBuild@v1
-    - name: ソリューションのビルド
+    - name: Build the Solution
       run: MSBuild.exe $Env:GITHUB_WORKSPACE\TJAPlayer3.sln -p:Configuration=Release
       timeout-minutes: 5
-    - name: アーティファクトのアップロード
+    - name: Upload artifacts
       uses: actions/upload-artifact@v1.0.0
       with:
         name: KabanFriends-TJAPlayer3-features
