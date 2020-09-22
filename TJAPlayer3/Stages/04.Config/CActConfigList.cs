@@ -1755,8 +1755,7 @@ namespace TJAPlayer3
 				{
 					case CItemBase.Eパネル種別.通常:
                     case CItemBase.Eパネル種別.その他:
-                        if ( TJAPlayer3.Tx.Config_ItemBox != null )
-                            TJAPlayer3.Tx.Config_ItemBox.t2D描画( TJAPlayer3.app.Device, x, y );
+                        TJAPlayer3.Tx.Config_ItemBox?.t2D描画( TJAPlayer3.app.Device, x, y );
 						break;
 				}
 				//-----------------
